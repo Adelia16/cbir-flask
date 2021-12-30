@@ -1,13 +1,92 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-</head>
-<body>
-    <H1>Hello Flask</H1>
-</body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <title>Kecerdasan Buatan</title>
+    </head>
+    <body>
+        <section
+            class="
+                flex
+                justify-center
+                items-center
+                w-screen
+                h-screen
+                bg-blue-500
+            "
+        >
+            <main
+                class="
+                    flex flex-col
+                    justify-center
+                    items-center
+                    p-16
+                    bg-white
+                    rounded-lg
+                "
+            >
+                <h1 class="text-3xl text-bold">Klasifikasi Daun Padi</h1>
+                
+
+                {% if uploaded_image %}
+                <img
+                    src="{{ url_for('send_uploaded_image', filename=uploaded_image) }}"
+                    class="mt-8 mb-4 h-48 border-8 border-black-200 rounded-md"
+                />
+                {% else %}
+                <div
+                    class="
+                        flex
+                        justify-center
+                        items-center
+                        my-8
+                        w-48
+                        h-48
+                        border-8 border-black-200
+                        rounded-md
+                    "
+                >
+                    <p class="text-center">
+                        Masukkan Gambar Daun Padi (background putih)
+                    </p>
+                </div>
+                {% endif %} {% if prediction %}
+                <p class="mb-8">Hasil Klasifikasi: {{prediction}}</p>
+                {% endif %}
+
+                <form
+                    method="post"
+                    enctype="multipart/form-data"
+                    class="flex flex-col"
+                >
+                    <input
+                        type="file"
+                        name="image"
+                        class="
+                            mb-4
+                            p-4
+                            border-8 border-black-200
+                            rounded-md
+                            bg-gray-100
+                        "
+                    />
+                    <button
+                        type="submit"
+                        class="p-4 bg-blue-500 text-white rounded-md"
+                    >
+                        Submit
+                    </button>
+                </form>
+            </main>
+        </section>
+        <footer class="flex gap-x-8 justify-center items-center h-32 bg-white">
+            <p>Kecerdasan Buatan</p>
+        </footer>
+    </body>
 </html>
